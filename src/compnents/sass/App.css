@@ -1,0 +1,11 @@
+li {
+  list-style: none;
+  cursor: pointer;
+}
+li:hover {
+  scale: 1.1;
+}
+
+h1 {
+  background: rgb(255, 255, 255);
+} /*# sourceMappingURL=App.css.map */
