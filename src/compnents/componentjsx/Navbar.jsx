@@ -3,13 +3,14 @@ import LogoImg from "../asserts/logoo-img.png";
 import { IoMdMenu } from "react-icons/io";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
 import "../sass/App.css";
+import { Link } from "react-scroll";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
   const Navitems = [
     {
       id: 1,
-      textUL: "Name",
+      textUL: "Home",
     },
     {
       id: 2,
@@ -54,7 +55,17 @@ const Navbar = () => {
           >
             <ul className="md:hidden lg:flex hidden  justify-around space-x-8">
               {Navitems.map(({ id, textUL }) => (
-                <li key={id}>{textUL}</li>
+                <li key={id}>
+                  <Link
+                    to={textUL}
+                    smooth={true}
+                    // duration={500}
+                    // offset={-70}
+                    // activeClass="active"
+                  >
+                    {textUL}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
@@ -74,7 +85,18 @@ const Navbar = () => {
         <div className="flex items-center justify-center h-screen">
           <ul className="md:hidden lg:hidden  sm:block space-y-5 text-center">
             {Navitems.map(({ id, textUL }) => (
-              <li key={id}>{textUL}</li>
+              <li key={id}>
+                {" "}
+                <Link
+                  to={textUL}
+                  smooth={true}
+                  // duration={500}
+                  // offset={-70}
+                  // activeClass="active"
+                >
+                  {textUL}
+                </Link>
+              </li>
             ))}
           </ul>
         </div>

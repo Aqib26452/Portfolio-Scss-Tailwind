@@ -13,7 +13,10 @@ import "../sass/home.scss";
 
 const Home = () => {
   return (
-    <div className="max-w-[1020px] mx-auto   my-20  flex flex-col-reverse md:flex-row items-center px-5 md:px-4">
+    <div
+      name="Home"
+      className="max-w-[1020px] mx-auto   my-20  flex flex-col-reverse md:flex-row items-center px-5 md:px-4"
+    >
       <div className="sm:w-3/3 md:w-1/2 mt-12 md:mt-24 space-y-2 px-4 md:px-1 ">
         <h3 className="font-bold">Welcome In My Portfolio... </h3>
         <div className="flex items-center text-2xl gap-2">

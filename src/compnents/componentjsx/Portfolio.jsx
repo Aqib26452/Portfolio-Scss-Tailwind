@@ -33,14 +33,17 @@ const Portfolio = () => {
     // },
   ];
   return (
-    <div className="max-w-[1020px] mx-auto   my-20   px-5 md:px-4 mt-24 space-y-4">
+    <div
+      name="Portfolio"
+      className="max-w-[1020px] mx-auto   my-20   px-5 md:px-4 mt-24 space-y-4"
+    >
       <h2 className="font-bold text-4xl text-center mb-10">Portfolio</h2>
       <span className="underline font-semibold">Featured Projects</span>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mt-5">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6  mt-6 ">
         {CardItem.map(({ id, logo, name }) => (
           <div
             key={id}
-            className="shadow-2xl  p-5 rounded-xl  hover:scale-110 duration-300"
+            className="lg:shadow-xl shadow-xl  p-5 rounded-xl  md:hover:scale-110   duration-300  "
           >
             <img
               src={logo}

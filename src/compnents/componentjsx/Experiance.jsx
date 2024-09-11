@@ -62,7 +62,10 @@ const Experiance = () => {
   ];
   return (
     <div>
-      <div className="max-w-[1020px] mx-auto   my-20   px-5 md:px-4 mt-24 space-y-4">
+      <div
+        name="Experiance"
+        className="max-w-[1020px] mx-auto   my-20   px-5 md:px-4 mt-24 space-y-4"
+      >
         <h1 className="H1Set SETCenter">Experiance</h1>
         <p className="SETCenter">
           I've more than 2 year of experiance in below technologies

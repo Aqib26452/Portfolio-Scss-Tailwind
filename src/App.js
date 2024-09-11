@@ -1,4 +1,5 @@
 import About from "./compnents/componentjsx/About";
+import Contact from "./compnents/componentjsx/Contact";
 import Experiance from "./compnents/componentjsx/Experiance";
 import Footer from "./compnents/componentjsx/Footer";
 import Home from "./compnents/componentjsx/Home";
@@ -13,6 +14,7 @@ function App() {
       <About />
       <Portfolio />
       <Experiance />
+      <Contact />
       <Footer />
     </>
   );

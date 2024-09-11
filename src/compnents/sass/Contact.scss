@@ -1,0 +1,12 @@
+.setFoamBG {
+  background: #e1e7ef;
+}
+.SetBtn {
+  background-color: black;
+  color: white;
+  transition: 0.9s all;
+  &:hover {
+    background-color: rgb(161, 150, 150);
+    color: rgb(0, 0, 0);
+  }
+}
