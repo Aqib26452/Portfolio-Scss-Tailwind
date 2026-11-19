@@ -152,7 +152,11 @@ const Home = () => {
             <span>I'm a</span>
             <ReactTyped
               className="text-[#4FD1C5]"
-              strings={["Front-end Developer", "Web Developer", "UI Builder"]}
+              strings={[
+                "Front-end Developer",
+                "Web Developer",
+                "Software Engineer",
+              ]}
               typeSpeed={95}
               backSpeed={30}
               backDelay={1400}
