@@ -9,8 +9,8 @@ import "../sass/App.css";
 const NAV_ITEMS = [
   { id: 1, to: "Home", label: "Home" },
   { id: 2, to: "About", label: "About" },
-  { id: 3, to: "Portfolio", label: "Portfolio" },
-  { id: 4, to: "Experiance", label: "Experience" },
+  { id: 3, to: "Expertise", label: "Expertise" },
+  { id: 4, to: "Projects", label: "Projects" },
   { id: 5, to: "Contact", label: "Contact" },
 ];
 
