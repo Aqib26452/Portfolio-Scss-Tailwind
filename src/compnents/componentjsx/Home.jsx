@@ -53,13 +53,13 @@ const Home = () => {
   const [cursorOn, setCursorOn] = useState(false);
 
   // Mouse ke saath chalne wali light ki position
-  const handleMove = (e) => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
-  };
+  // const handleMove = (e) => {
+  //   const el = sectionRef.current;
+  //   if (!el) return;
+  //   const r = el.getBoundingClientRect();
+  //   el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+  //   el.style.setProperty("--my", `${e.clientY - r.top}px`);
+  // };
 
   useEffect(() => {
     const v = videoRef.current;
@@ -73,9 +73,9 @@ const Home = () => {
     <section
       name="Home"
       ref={sectionRef}
-      onMouseMove={handleMove}
-      onMouseEnter={() => setCursorOn(true)}
-      onMouseLeave={() => setCursorOn(false)}
+      // onMouseMove={handleMove}
+      // onMouseEnter={() => setCursorOn(true)}
+      // onMouseLeave={() => setCursorOn(false)}
       style={bodyFont}
       className="relative isolate flex min-h-screen items-center overflow-hidden bg-[#06151A] text-[#E8F1F2] antialiased"
     >

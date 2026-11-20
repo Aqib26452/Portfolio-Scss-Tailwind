@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   FaEnvelope,
+  FaPhoneAlt,
   FaMapMarkerAlt,
   FaPaperPlane,
   FaCheck,
@@ -26,8 +27,52 @@ const bodyFont = { fontFamily: "'DM Sans', system-ui, sans-serif" };
 const FORM_URL = "https://api.web3forms.com/submit";
 const ACCESS_KEY = "801f5748-55d3-4e11-be29-ad7ab7d34df8";
 
+const EMAIL = "aqibshahzaddigi2@gmail.com";
+const SUBJECT = "Job opportunity";
+const MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent(SUBJECT)}`;
+
+// Device ke hisaab se Gmail kholta hai, aur "To" me email pehle se bhari hoti hai
+const openGmail = (e) => {
+  const ua = navigator.userAgent;
+
+  // Android: normal mailto chalne do (Gmail default ho to seedha Gmail khulta hai)
+  if (/Android/i.test(ua)) return;
+
+  e.preventDefault();
+
+  // iPhone: Gmail app kholo, na ho to Apple Mail
+  if (/iPhone|iPad|iPod/i.test(ua)) {
+    window.location.href = `googlegmail:///co?to=${EMAIL}&subject=${encodeURIComponent(SUBJECT)}`;
+    setTimeout(() => {
+      if (!document.hidden) window.location.href = MAILTO;
+    }, 1000);
+    return;
+  }
+
+  // Laptop/PC: browser me Gmail compose page naye tab me
+  window.open(
+    `https://mail.google.com/mail/?view=cm&to=${EMAIL}&su=${encodeURIComponent(SUBJECT)}`,
+    "_blank",
+    "noopener",
+  );
+};
+
+// href wali row click hoti hai: mailto: mail app kholta hai, tel: dialer kholta hai.
+// Location me href nahi hai, isliye wo sirf text rehti hai.
 const INFO = [
-  { Icon: FaEnvelope, label: "Email", value: "aqibshahzaddigi2@gmail.com" }, // apni email likho
+  {
+    Icon: FaEnvelope,
+    label: "Email",
+    value: EMAIL,
+    href: MAILTO,
+    onClick: openGmail,
+  },
+  {
+    Icon: FaPhoneAlt,
+    label: "Phone",
+    value: "+92 300 1234567", // apna number likho
+    href: "tel:+923001234567", // spaces aur dashes ke baghair, country code ke sath
+  },
   { Icon: FaMapMarkerAlt, label: "Location", value: "Islamabad, Pakistan" },
 ];
 
@@ -141,7 +186,7 @@ const CardTitle = ({ children }) => (
   </h3>
 );
 
-// Left side: email, location aur socials
+// Left side: email, phone, location aur socials
 const InfoCard = () => (
   <GlowCard>
     <div className="flex h-full flex-col">
@@ -152,21 +197,41 @@ const InfoCard = () => (
       </p>
 
       <ul className="mt-6 space-y-4">
-        {INFO.map(({ Icon, label, value }, i) => (
-          <li
-            key={label}
-            style={{ animationDelay: `${300 + i * 150}ms` }}
-            className="contact-anim flex animate-[contact-slide_0.6s_ease-out_both] items-center gap-4"
-          >
-            <span className="grid h-11 w-11 place-items-center rounded-full border border-[#4FD1C5]/40 bg-[#4FD1C5]/10 text-[#4FD1C5]">
-              <Icon />
-            </span>
-            <div>
-              <p className="text-xs text-[#E8F1F2]/55">{label}</p>
-              <p className="text-sm md:text-xl font-medium">{value}</p>
-            </div>
-          </li>
-        ))}
+        {INFO.map(({ Icon, label, value, href, onClick }, i) => {
+          const content = (
+            <>
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-[#4FD1C5]/40 bg-[#4FD1C5]/10 text-[#4FD1C5]">
+                <Icon />
+              </span>
+              <div className="min-w-0">
+                <p className="text-xs text-[#E8F1F2]/55">{label}</p>
+                <p className="break-all text-sm font-medium md:text-xl">
+                  {value}
+                </p>
+              </div>
+            </>
+          );
+
+          return (
+            <li
+              key={label}
+              style={{ animationDelay: `${300 + i * 150}ms` }}
+              className="contact-anim animate-[contact-slide_0.6s_ease-out_both]"
+            >
+              {href ? (
+                <a
+                  href={href}
+                  onClick={onClick}
+                  className="flex items-center gap-4 transition-colors duration-300 hover:text-[#FFB547]"
+                >
+                  {content}
+                </a>
+              ) : (
+                <div className="flex items-center gap-4">{content}</div>
+              )}
+            </li>
+          );
+        })}
       </ul>
 
       {/* Socials: hover par sirf rang badalta hai, hilta nahi */}
