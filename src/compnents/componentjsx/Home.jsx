@@ -56,7 +56,7 @@ const delay = (step) => ({ animationDelay: `${step * 120}ms` });
 const Home = () => {
   const videoRef = useRef(null);
   const sectionRef = useRef(null);
-  const [cursorOn, setCursorOn] = useState(false);
+  const [cursorOn] = useState(false);
 
   // Mouse ke saath chalne wali light ki position
   // const handleMove = (e) => {
@@ -212,10 +212,7 @@ const Home = () => {
             {/* Alag Action Buttons Block */}
             <div className="flex flex-wrap items-center gap-4">
               {/* Primary Button: Contact Me */}
-              <a
-                href=""
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-[#FFB547] to-[#FF8A00] px-7 py-3.5 text-sm font-extrabold tracking-wide text-[#060D14] shadow-[0_0_25px_rgba(255,181,71,0.35)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(255,181,71,0.6)]"
-              >
+              <a className="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-[#FFB547] to-[#FF8A00] px-7 py-3.5 text-sm font-extrabold tracking-wide text-[#060D14] shadow-[0_0_25px_rgba(255,181,71,0.35)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(255,181,71,0.6)]">
                 <Link to="Contact" smooth={true} offset={-80} duration={500}>
                   Contact Me
                 </Link>

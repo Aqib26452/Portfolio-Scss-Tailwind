@@ -347,7 +347,7 @@ const Timeline = ({ items }) => (
 
 // Skills: pills ek ek karke pop hoti hain jab section visible ho
 const SkillsGrid = () => {
-  const [ref, shown] = useInView(0.2);
+  const [ref] = useInView(0.2);
 
   return (
     <div ref={ref} className="grid gap-8 md:grid-cols-3">
