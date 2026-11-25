@@ -267,19 +267,24 @@ const Reveal = ({ children, delay = 0, className = "" }) => {
   const [ref, shown] = useInView();
   const [settled, setSettled] = useState(false);
 
+  // animation khatam hone ke baad timer se settled karo (transitionend par bharosa nahi)
+  useEffect(() => {
+    if (!shown) return;
+    const t = setTimeout(() => setSettled(true), delay + 750);
+    return () => clearTimeout(t);
+  }, [shown, delay]);
+
   return (
     <div
       ref={ref}
-      style={{
-        transitionDelay: `${delay}ms`,
-        transform: settled ? "none" : undefined,
-      }}
-      onTransitionEnd={(e) => {
-        if (e.target === e.currentTarget && shown) setSettled(true);
-      }}
-      className={`transition duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${
-        shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-      } ${className}`}
+      style={settled ? undefined : { transitionDelay: `${delay}ms` }}
+      className={
+        settled
+          ? className // koi transform/transition class nahi
+          : `transition-[opacity,transform] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${
+              shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+            } ${className}`
+      }
     >
       {children}
     </div>
@@ -288,36 +293,13 @@ const Reveal = ({ children, delay = 0, className = "" }) => {
 
 // Card: mouse ke saath light + hover par gradient border
 // NOTE: backdrop-blur hata diya, wohi text blur karta tha
-const SpotCard = ({ children, className = "" }) => {
-  const ref = useRef(null);
-
-  const move = (e) => {
-    const el = ref.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--sx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--sy", `${e.clientY - r.top}px`);
-  };
-
-  return (
-    <div
-      ref={ref}
-      onMouseMove={move}
-      className={`group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-[#0C2B33]/80 p-6 transition-colors duration-300 hover:border-[#4FD1C5]/40 md:p-8 ${className}`}
-    >
-      {/* Mouse follow light */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          background:
-            "radial-gradient(320px circle at var(--sx, 50%) var(--sy, 50%), rgba(255,181,71,0.14), rgba(79,209,197,0.06) 55%, transparent 75%)",
-        }}
-      />
-      {/* Content (isse upar rakha taake light text ke upar na aaye) */}
-      <div className="relative z-10">{children}</div>
-    </div>
-  );
-};
+const SpotCard = ({ children, className = "" }) => (
+  <div
+    className={`relative h-full overflow-hidden rounded-3xl border border-white/10 bg-[#0C2B33]/80 p-6 md:p-8 ${className}`}
+  >
+    {children}
+  </div>
+);
 
 const CardTitle = ({ children }) => (
   <h3
@@ -336,7 +318,7 @@ const Timeline = ({ items }) => (
         {/* Dot (current job ka dot ping karta hai) */}
         <span className="absolute -left-[7px] top-1.5 flex h-3.5 w-3.5">
           {current && (
-            <span className="absolute inline-flex h-full w-full rounded-full bg-[#4FD1C5] opacity-60 motion-safe:animate-ping" />
+            <span className="absolute inline-flex h-full w-full rounded-full bg-[#4FD1C5] " />
           )}
           <span
             className={`relative h-3.5 w-3.5 rounded-full border-2 bg-[#06151A] ${
@@ -381,10 +363,8 @@ const SkillsGrid = () => {
             {items.map(({ name, Icon }, i) => (
               <li
                 key={name}
-                style={{ animationDelay: `${i * 90}ms` }}
-                className={`about-anim flex cursor-default items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm transition-[transform,border-color,background-color] duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-white/10 ${
-                  shown ? "animate-[about-pop_0.5s_ease-out_both]" : "opacity-0"
-                }`}
+                // style={{ animationDelay: `${i * 90}ms` }}
+                className="flex cursor-default items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm"
               >
                 <Icon style={{ color }} className="text-base" />
                 {name}
@@ -408,15 +388,15 @@ const About = () => {
     <section
       name="About"
       style={bodyFont}
-      className="relative isolate overflow-hidden bg-[#06151A] py-20 text-[#E8F1F2] antialiased md:py-28"
+      className="relative isolate overflow-hidden bg-[#06151A] py-4 text-[#E8F1F2] antialiased md:py-28"
     >
       {/* Saari custom animations yahan hain */}
-      <style>{`
+      {/* <style>{`
         @keyframes about-float { 0%,100% { transform: translate3d(0,0,0) } 50% { transform: translate3d(0,-14px,0) } }
         @keyframes about-shine { to { background-position: 200% center } }
         @keyframes about-pop   { from { opacity: 0; transform: translateY(12px) scale(.9) } to { opacity: 1; transform: none } }
         @media (prefers-reduced-motion: reduce) { .about-anim { animation: none !important; opacity: 1 !important } }
-      `}</style>
+      `}</style> */}
 
       {/* Background layers */}
       <ParticleBackground />
@@ -425,7 +405,7 @@ const About = () => {
 
       <div className="mx-auto w-[92%] md:w-[80%]">
         {/* Heading */}
-        <div ref={titleRef} className="mb-12 text-center md:mb-16">
+        <div ref={titleRef} className="mb-5 text-center md:mb-16">
           <h2
             style={headingFont}
             className={`text-4xl font-extrabold tracking-tight transition duration-700 sm:text-5xl lg:text-6xl ${
@@ -453,10 +433,10 @@ const About = () => {
             <SpotCard>
               <CardTitle>Who I am</CardTitle>
               <p className="text-lg leading-relaxed text-[#E8F1F2]/85 md:text-xl">
-                Hello, I&rsquo;m Aqib, a passionate web developer who works with
-                the MERN stack. I have a software engineering degree and one
-                year of experience at a software house, and I like building
-                interfaces that look good and work well on every screen.
+                Hello, I&rsquo;m Aqib, a passionate web developer . I have a
+                software engineering degree and one year of experience at a
+                software house, and I like building interfaces that look good
+                and work well on every screen.
               </p>
             </SpotCard>
           </Reveal>
@@ -474,21 +454,21 @@ const About = () => {
                 </div>
                 <p
                   style={headingFont}
-                  className="mt-3 text-5xl font-extrabold text-[#FFB547] md:text-6xl"
+                  className="md:mt-3 mt-1 text-5xl font-extrabold text-[#FFB547] md:text-6xl"
                 >
                   {years} year
                 </p>
-                <p className="mt-1 text-[#E8F1F2]/75">
+                <p className="md:mt-1 mt-3 text-[#E8F1F2]/75">
                   at Octaloop Technologies Pvt Ltd
                 </p>
                 <div className="mt-6 grid grid-cols-2 gap-3">
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-3 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-[#FFB547]/50">
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-3 md:transition-[transform,border-color] duration-300 md:hover:-translate-y-1 md:hover:border-[#FFB547]/50">
                     <p style={headingFont} className="text-lg font-bold">
-                      MERN
+                      Web Development
                     </p>
                     <p className="text-xs text-[#E8F1F2]/55">Main stack</p>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/5 p-3 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-[#4FD1C5]/50">
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-3 transition-[transform,border-color] ">
                     <p style={headingFont} className="text-lg font-bold">
                       BSSE
                     </p>
@@ -498,10 +478,9 @@ const About = () => {
               </div>
             </SpotCard>
           </Reveal>
-
           {/* Experience */}
           <Reveal className="lg:col-span-7">
-            <SpotCard>
+            <SpotCard className="about-static">
               <CardTitle>Experience</CardTitle>
               <Timeline items={EXPERIENCE} />
             </SpotCard>
@@ -509,7 +488,7 @@ const About = () => {
 
           {/* Education */}
           <Reveal delay={120} className="lg:col-span-5">
-            <SpotCard>
+            <SpotCard className="about-static">
               <CardTitle>Education</CardTitle>
               <Timeline items={EDUCATION} />
             </SpotCard>
@@ -530,8 +509,9 @@ const About = () => {
                 style={{ ...headingFont, backgroundSize: "200% auto" }}
                 className="about-anim mx-auto max-w-3xl animate-[about-shine_6s_linear_infinite] bg-gradient-to-r from-[#E8F1F2] via-[#FFB547] to-[#E8F1F2] bg-clip-text text-2xl font-bold leading-snug text-transparent md:text-3xl"
               >
-                I want to build clean, fast and useful web products, and keep
-                learning with every project.
+                I turn ideas into fast, accessible and pixel-perfect interfaces
+                that people enjoy using.From a pixel on the screen to data in
+                the database, I build web products that work end to end
               </p>
             </div>
           </Reveal>

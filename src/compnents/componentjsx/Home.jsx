@@ -10,6 +10,7 @@ import {
   FaJs,
 } from "react-icons/fa";
 import AqiPic from "../asserts/AqibPIC.jpg";
+import { Link } from "react-scroll";
 
 /*
   Fonts (public/index.html <head> mein ek dafa):
@@ -29,8 +30,13 @@ import AqiPic from "../asserts/AqibPIC.jpg";
 const VIDEO_SRC = "/hero-bg.mp4";
 
 const SOCIALS = [
-  { id: 1, Icon: FaFacebookSquare, href: "#", label: "Facebook" },
-  { id: 2, Icon: FaLinkedin, href: "#", label: "LinkedIn" },
+  { id: 1, Icon: FaFacebookSquare, href: "", label: "Facebook" },
+  {
+    id: 2,
+    Icon: FaLinkedin,
+    href: "https://www.linkedin.com/in/aqib-shahzad-5b2923399/",
+    label: "LinkedIn",
+  },
   { id: 3, Icon: FaTelegram, href: "#", label: "Telegram" },
 ];
 
@@ -77,7 +83,7 @@ const Home = () => {
       // onMouseEnter={() => setCursorOn(true)}
       // onMouseLeave={() => setCursorOn(false)}
       style={bodyFont}
-      className="relative isolate flex min-h-screen items-center overflow-hidden bg-[#06151A] text-[#E8F1F2] antialiased"
+      className="relative isolate flex md:min-h-screen items-center overflow-hidden bg-[#06151A] text-[#E8F1F2] antialiased"
     >
       {/* Saari custom animations (keyframes) yahan hain */}
       <style>{`
@@ -122,27 +128,27 @@ const Home = () => {
       />
 
       {/* Width About section ke barabar: mobile 92%, desktop 80% */}
-      <div className="mx-auto grid w-[92%] items-center gap-14 pb-24 pt-32 md:w-[80%] md:grid-cols-[1.2fr_1fr]">
+      <div className="mx-auto grid w-[92%] items-center gap-14 md:pb-24 pb-4 pt-32 md:w-[80%] md:grid-cols-[1.2fr_1fr]">
         {/* ---------------- Text ---------------- */}
-        <div className="order-2 text-center md:order-1 md:text-left">
+        <div className="order-2  md:order-1 ">
           <span
             style={delay(0)}
-            className={`${RISE} inline-flex items-center gap-2 rounded-full border border-[#4FD1C5]/40 bg-[#4FD1C5]/10 px-4 py-1.5 text-xs font-medium text-[#4FD1C5]`}
+            className={`${RISE}  inline-flex items-center gap-2 rounded-full border border-[#4FD1C5]/40 bg-[#4FD1C5]/10 px-4 py-1.5 text-xs font-bold text-[#4FD1C5]`}
           >
             <span className="h-2 w-2 rounded-full bg-[#4FD1C5] motion-safe:animate-pulse" />
             Open to work
           </span>
           <h1
             style={{ ...headingFont, ...delay(2) }}
-            className={`${RISE} mt-6 bg-transparent`}
+            className={`${RISE} md:mt-6 bg-transparent`}
           >
-            <span className="block bg-transparent font-mono text-lg text-gray-400 sm:text-xl">
+            <span className="block bg-transparent mt-2 md:mt-0 font-mono md:text-lg text-md text-gray-400 sm:text-xl">
               Hello, I&rsquo;m
             </span>
-            <span className="mt-2 block bg-transparent text-6xl font-extrabold tracking-tight text-white sm:text-8xl">
+            <span className="md:mt-2 mt-1 text-center md:text-left block bg-transparent xl:text-6xl md:text-4xl text-3xl font-extrabold tracking-tight text-white t">
               Aqib Shahzad
             </span>
-            <span className="mt-4 block h-1 w-20 rounded-full bg-[#FFB547]" />
+            <span className="mt-4  h-1 w-20 rounded-full bg-[#FFB547] md:block hidden" />
           </h1>
 
           <div
@@ -207,10 +213,12 @@ const Home = () => {
             <div className="flex flex-wrap items-center gap-4">
               {/* Primary Button: Contact Me */}
               <a
-                href="#contact"
+                href=""
                 className="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-[#FFB547] to-[#FF8A00] px-7 py-3.5 text-sm font-extrabold tracking-wide text-[#060D14] shadow-[0_0_25px_rgba(255,181,71,0.35)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(255,181,71,0.6)]"
               >
-                <span>Contact Me</span>
+                <Link to="Contact" smooth={true} offset={-80} duration={500}>
+                  Contact Me
+                </Link>
               </a>
 
               {/* Attractive Download CV Button */}

@@ -3,3 +3,17 @@ h3 {
   color: $Seth3Color;
   font-weight: bold;
 }
+.about-static,
+.about-static * {
+  transition: none !important;
+  animation: none !important;
+}
+
+.about-static:hover,
+.about-static *:hover {
+  transform: none !important;
+  scale: none !important;
+  translate: none !important;
+  zoom: 1 !important;
+  filter: none !important;
+}

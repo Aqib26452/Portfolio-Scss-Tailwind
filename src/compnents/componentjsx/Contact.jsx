@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import "../sass/Projects.scss";
 import {
   FaEnvelope,
   FaPhoneAlt,
@@ -319,7 +320,7 @@ const Contact = () => {
     <section
       name="Contact"
       style={bodyFont}
-      className="relative isolate overflow-hidden bg-[#06151A] py-20 text-[#E8F1F2] antialiased md:py-28"
+      className="relative isolate overflow-hidden bg-[#06151A] py-10 text-[#E8F1F2] antialiased md:py-28"
     >
       {/* Animations yahan hain */}
       <style>{`
@@ -347,7 +348,7 @@ const Contact = () => {
         <div ref={titleRef} className="mb-12 text-center md:mb-16">
           <h2
             style={headingFont}
-            className={`text-4xl font-extrabold tracking-tight transition duration-700 sm:text-5xl lg:text-6xl ${
+            className={` pj-heading text-4xl font-extrabold tracking-tight transition duration-700 sm:text-5xl lg:text-6xl ${
               titleShown
                 ? "translate-y-0 opacity-100"
                 : "translate-y-6 opacity-0"

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../sass/Projects.scss"; // adjust the path to where you saved the SCSS file
 
+import FitnesFeud from "../asserts/video/Fitness Feud.mp4";
+
 // Local video: import ecomVideo from "../asserts/videos/ecommerce.mp4";
 // Local thumbnail: import ecomThumb from "../asserts/images/ecommerce.jpg";
 
@@ -20,14 +22,14 @@ const projects = [
   },
   {
     id: 2,
-    title: "Task Manager",
-    url: "tasks.yoursite.com",
+    title: "Fitness Feud",
+    url: "",
     description: "Task board with drag and drop and saved progress.",
-    tech: ["React", "SCSS"],
+    tech: ["Nextjs", "React", "SCSS"],
     thumbnail: "",
-    video: "", // e.g. ecomVideo  (local file) -> videoType: "local"
+    video: FitnesFeud, // e.g. ecomVideo  (local file) -> videoType: "local"
     videoType: "local",
-    github: "https://github.com/your-username/task-manager",
+    github: "https://github.com/Aqib26452/Fitnes-Fued",
     live: "",
   },
   {
@@ -303,7 +305,7 @@ const Projects = () => {
         <div ref={titleRef} className={`pj-head ${titleShown ? "is-in" : ""}`}>
           <h2 className="pj-heading">My Projects</h2>
           <span className="pj-rule" />
-          <p className="pj-sub">
+          <p className="pj-sub ">
             Watch each project run, then read the code on GitHub.
           </p>
         </div>

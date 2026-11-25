@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FaReact, FaPlay, FaGithub } from "react-icons/fa";
+import { FaReact } from "react-icons/fa";
 import { SiNextdotjs } from "react-icons/si";
 import HtmlPic from "../asserts/html.png";
 import CssPic from "../asserts/CSS-picc.png";
@@ -29,8 +29,6 @@ const PROJECTS = [
     Icon: FaReact,
     color: "#4FD1C5",
     tags: ["React", "Hooks", "Tailwind"],
-    videoLink: "#", // demo video ka link
-    codeLink: "#", // GitHub ka link
   },
   {
     id: 2,
@@ -40,8 +38,6 @@ const PROJECTS = [
     Icon: SiNextdotjs,
     color: "#E8F1F2",
     tags: ["Next.js", "SSR", "Routing"],
-    videoLink: "#",
-    codeLink: "#",
   },
   {
     id: 3,
@@ -51,8 +47,6 @@ const PROJECTS = [
     logo: HtmlPic,
     color: "#FFB547",
     tags: ["Semantic", "Responsive"],
-    videoLink: "#",
-    codeLink: "#",
   },
   {
     id: 4,
@@ -62,8 +56,6 @@ const PROJECTS = [
     logo: CssPic,
     color: "#4FD1C5",
     tags: ["Flexbox", "Grid", "Animation"],
-    videoLink: "#",
-    codeLink: "#",
   },
   {
     id: 5,
@@ -73,8 +65,6 @@ const PROJECTS = [
     logo: JsPic,
     color: "#FFB547",
     tags: ["ES6", "DOM", "Fetch API"],
-    videoLink: "#",
-    codeLink: "#",
   },
   {
     id: 6,
@@ -83,8 +73,6 @@ const PROJECTS = [
     logo: PHPPic,
     color: "#4FD1C5",
     tags: ["PHP", "MySQL", "Forms"],
-    videoLink: "#",
-    codeLink: "#",
   },
 ];
 
@@ -161,8 +149,7 @@ const ProjectLogo = ({ logo, Icon, color, name }) => (
 
 // Ek project ka card
 const ProjectCard = ({ project, number }) => {
-  const { name, description, logo, Icon, color, tags, videoLink, codeLink } =
-    project;
+  const { name, description, logo, Icon, color, tags } = project;
   const ref = useRef(null);
 
   // Mouse ki position save karte hain taake light uske saath chale
@@ -222,7 +209,7 @@ const ProjectCard = ({ project, number }) => {
           ))}
         </ul>
 
-        {/* Buttons (mt-auto se hamesha card ke neeche rehte hain) */}
+        {/* Buttons (mt-auto se hamesha card ke neeche rehte hain)
         <div className="mt-auto flex justify-center gap-3 pt-6">
           <a
             href={videoLink}
@@ -242,7 +229,7 @@ const ProjectCard = ({ project, number }) => {
             <FaGithub />
             Source Code
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -257,7 +244,7 @@ const Portfolio = () => {
     <section
       name="Portfolio"
       style={bodyFont}
-      className="relative isolate overflow-hidden bg-[#06151A] py-20 text-[#E8F1F2] antialiased md:py-28"
+      className="relative isolate overflow-hidden bg-[#06151A] py-10 text-[#E8F1F2] antialiased md:py-28"
     >
       {/* Animations yahan hain */}
       <style>{`
@@ -273,7 +260,7 @@ const Portfolio = () => {
       {/* Width About aur Home ke barabar: mobile 92%, desktop 80% */}
       <div className="mx-auto w-[92%] md:w-[80%]">
         {/* Heading */}
-        <div ref={titleRef} className="mb-12 text-center md:mb-16">
+        <div ref={titleRef} className=" text-center md:mb-16">
           <h2
             style={headingFont}
             className={`text-4xl font-extrabold tracking-tight transition duration-700 sm:text-5xl lg:text-6xl ${
