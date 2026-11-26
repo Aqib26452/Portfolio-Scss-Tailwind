@@ -212,11 +212,11 @@ const Home = () => {
             {/* Alag Action Buttons Block */}
             <div className="flex flex-wrap items-center gap-4">
               {/* Primary Button: Contact Me */}
-              <a className="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-[#FFB547] to-[#FF8A00] px-7 py-3.5 text-sm font-extrabold tracking-wide text-[#060D14] shadow-[0_0_25px_rgba(255,181,71,0.35)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(255,181,71,0.6)]">
+              <div className="group relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-[#FFB547] to-[#FF8A00] px-7 py-3.5 text-sm font-extrabold tracking-wide text-[#060D14] shadow-[0_0_25px_rgba(255,181,71,0.35)] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(255,181,71,0.6)]">
                 <Link to="Contact" smooth={true} offset={-80} duration={500}>
                   Contact Me
                 </Link>
-              </a>
+              </div>
 
               {/* Attractive Download CV Button */}
               <a
